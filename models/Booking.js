@@ -34,7 +34,7 @@ const BookingSchema = new mongoose.Schema({
         required: true,
         index: true
       },
-      quantity: {                 
+      count: {                 
         type: Number,
         required: true,
         min: 1
