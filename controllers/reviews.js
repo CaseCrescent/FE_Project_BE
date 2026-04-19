@@ -59,7 +59,7 @@ exports.addReview = async (req, res, next) => {
         if (!booking) {
             return res.status(403).json({
                 success: false,
-                message: 'You must have a booking record at this hotel before reviewing'
+                message: 'คุณต้องมีประวัติการจองโรงแรมนี้ก่อน จึงจะสามารถเขียนรีวิวได้'
             });
         }
 
