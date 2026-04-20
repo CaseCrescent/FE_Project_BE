@@ -1,5 +1,5 @@
 const express = require('express');
-const { getReviews, addReview, updateReview, deleteReview } = require('../controllers/reviews');
+const { getReviews, addReview, updateReview, deleteReview, likeReview } = require('../controllers/reviews');
 
 const router = express.Router({ mergeParams: true });
 
@@ -12,5 +12,8 @@ router.route('/')
 router.route('/:id')
     .put(protect, checkBanned, updateReview)
     .delete(protect, checkBanned, deleteReview);
+
+router.route('/:id/like')
+    .put(protect, checkBanned, likeReview);
 
 module.exports = router;

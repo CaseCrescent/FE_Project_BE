@@ -178,3 +178,70 @@ exports.deleteReview = async (req, res, next) => {
         return res.status(500).json({ success: false, message: 'Cannot delete Review' });
     }
 };
+
+//@desc Like or dislike a review (toggle)
+//@route PUT /api/v1/reviews/:id/like
+//@access Private
+exports.likeReview = async (req, res, next) => {
+    try {
+        const review = await Review.findById(req.params.id);
+        if (!review) {
+            return res.status(404).json({
+                success: false,
+                message: `No review with the id of ${req.params.id}`
+            });
+        }
+
+        // Cannot like/dislike your own review
+        if (review.user.toString() === req.user.id) {
+            return res.status(400).json({
+                success: false,
+                message: 'You cannot like or dislike your own review'
+            });
+        }
+
+        const { action } = req.body;
+        if (action !== 'like' && action !== 'dislike') {
+            return res.status(400).json({
+                success: false,
+                message: 'Action must be "like" or "dislike"'
+            });
+        }
+
+        const userId = req.user.id;
+        const likeIndex = review.likes.indexOf(userId);
+        const dislikeIndex = review.dislikes.indexOf(userId);
+
+        if (action === 'like') {
+            if (likeIndex !== -1) {
+                // Already liked → toggle off (remove like)
+                review.likes.splice(likeIndex, 1);
+            } else {
+                // Add like, remove dislike if present
+                if (dislikeIndex !== -1) review.dislikes.splice(dislikeIndex, 1);
+                review.likes.push(userId);
+            }
+        } else {
+            if (dislikeIndex !== -1) {
+                // Already disliked → toggle off (remove dislike)
+                review.dislikes.splice(dislikeIndex, 1);
+            } else {
+                // Add dislike, remove like if present
+                if (likeIndex !== -1) review.likes.splice(likeIndex, 1);
+                review.dislikes.push(userId);
+            }
+        }
+
+        await review.save();
+        res.status(200).json({
+            success: true,
+            data: {
+                likes: review.likes,
+                dislikes: review.dislikes
+            }
+        });
+    } catch (err) {
+        console.log(err.stack);
+        return res.status(500).json({ success: false, message: 'Cannot update vote' });
+    }
+};
