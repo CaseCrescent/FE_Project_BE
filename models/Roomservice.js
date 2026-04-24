@@ -23,9 +23,21 @@ const RoomServiceSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    enum: ['available', 'unavailable'],
+    enum: ['available', 'pending', 'unavailable'],
     default: 'available',
     index: true
+  },
+
+  minQuantity: {
+    type: Number,
+    default: 1,
+    min: 1
+  },
+
+  maxQuantity: {
+    type: Number,
+    default: 10,
+    min: 1
   }
 
 }, {

@@ -79,3 +79,51 @@ exports.getRoomServicesByBooking = async (req, res) => {
     res.status(400).json({ success: false, error: err.message });
   }
 };
+exports.getRoomServiceById = async (req, res) => {
+  try {
+    const service = await RoomService.findById(req.params.id);
+
+    if (!service) {
+      return res.status(404).json({ success: false, message: "Not found" });
+    }
+
+    res.status(200).json({ success: true, data: service });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+};
+exports.updateRoomService = async (req, res) => {
+  try {
+    const { name, description, status, minQuantity, maxQuantity } = req.body;
+
+    const service = await RoomService.findByIdAndUpdate(
+      req.params.id,
+      { name, description, status, minQuantity, maxQuantity },
+      { new: true, runValidators: true }
+    );
+
+    if (!service) {
+      return res.status(404).json({ success: false, message: "Not found" });
+    }
+
+    res.status(200).json({ success: true, data: service });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
+  }
+};
+
+exports.deleteRoomService = async (req, res) => {
+  try {
+    const service = await RoomService.findById(req.params.id);
+
+    if (!service) {
+      return res.status(404).json({ success: false, message: "Room service not found" });
+    }
+
+    await service.deleteOne();
+
+    res.status(200).json({ success: true, data: {} });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+};
