@@ -26,18 +26,6 @@ const RoomServiceSchema = new mongoose.Schema({
     enum: ['available', 'unavailable'],
     default: 'available',
     index: true
-  },
-
-  maxQuantity: {
-    type: Number,
-    required: [true, 'Please specify maximum quantity'],
-    min: 1
-  },
-  
-  minQuantity: {
-    type: Number,
-    required: [true, 'Please specify minimum quantity'],
-    default: 1
   }
 
 }, {
