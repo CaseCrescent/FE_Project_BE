@@ -1,90 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1777137736133" clover="3.2.0">
-  <project timestamp="1777137736133" name="All files">
-    <metrics statements="60" coveredstatements="55" conditionals="26" coveredconditionals="24" methods="3" coveredmethods="2" elements="89" coveredelements="81" complexity="0" loc="60" ncloc="60" packages="2" files="6" classes="6"/>
-    <package name="controllers">
-      <metrics statements="38" coveredstatements="38" conditionals="24" coveredconditionals="24" methods="2" coveredmethods="2"/>
-      <file name="reviews.js" path="C:\CEDT Series\SWLab\SEProject\se-project-be-68-2-kingoporii\controllers\reviews.js">
-        <metrics statements="24" coveredstatements="24" conditionals="14" coveredconditionals="14" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="48" count="8" type="stmt"/>
-        <line num="49" count="8" type="stmt"/>
-        <line num="50" count="8" type="cond" truecount="2" falsecount="0"/>
-        <line num="51" count="1" type="stmt"/>
-        <line num="58" count="7" type="stmt"/>
-        <line num="59" count="7" type="cond" truecount="2" falsecount="0"/>
-        <line num="60" count="1" type="stmt"/>
-        <line num="67" count="6" type="stmt"/>
-        <line num="68" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="69" count="1" type="stmt"/>
-        <line num="76" count="5" type="cond" truecount="4" falsecount="0"/>
-        <line num="77" count="1" type="stmt"/>
-        <line num="84" count="4" type="stmt"/>
-        <line num="90" count="1" type="stmt"/>
-        <line num="92" count="3" type="stmt"/>
-        <line num="93" count="3" type="cond" truecount="2" falsecount="0"/>
-        <line num="94" count="1" type="stmt"/>
-        <line num="96" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="97" count="1" type="stmt"/>
-        <line num="99" count="1" type="stmt"/>
-      </file>
-      <file name="roomservices.js" path="C:\CEDT Series\SWLab\SEProject\se-project-be-68-2-kingoporii\controllers\roomservices.js">
-        <metrics statements="14" coveredstatements="14" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="4" type="stmt"/>
-        <line num="10" count="4" type="stmt"/>
-        <line num="11" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="14" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="15" count="3" type="stmt"/>
-        <line num="16" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
-        <line num="35" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="models">
-      <metrics statements="22" coveredstatements="17" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="Booking.js" path="C:\CEDT Series\SWLab\SEProject\se-project-be-68-2-kingoporii\models\Booking.js">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="51" count="2" type="stmt"/>
-      </file>
-      <file name="Hotel.js" path="C:\CEDT Series\SWLab\SEProject\se-project-be-68-2-kingoporii\models\Hotel.js">
-        <metrics statements="11" coveredstatements="6" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="50" count="2" type="stmt"/>
-        <line num="57" count="2" type="stmt"/>
-        <line num="65" count="2" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="67" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="68" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="74" count="2" type="stmt"/>
-      </file>
-      <file name="Review.js" path="C:\CEDT Series\SWLab\SEProject\se-project-be-68-2-kingoporii\models\Review.js">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="45" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-      </file>
-      <file name="Roomservice.js" path="C:\CEDT Series\SWLab\SEProject\se-project-be-68-2-kingoporii\models\Roomservice.js">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
-      </file>
-    </package>
+<coverage generated="1777177016872" clover="3.2.0">
+  <project timestamp="1777177016872" name="All files">
+    <metrics statements="38" coveredstatements="38" conditionals="24" coveredconditionals="24" methods="2" coveredmethods="2" elements="64" coveredelements="64" complexity="0" loc="38" ncloc="38" packages="1" files="2" classes="2"/>
+    <file name="reviews.js" path="C:\CEDT Series\SWLab\SEProject\se-project-be-68-2-kingoporii\controllers\reviews.js">
+      <metrics statements="24" coveredstatements="24" conditionals="14" coveredconditionals="14" methods="1" coveredmethods="1"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="47" count="1" type="stmt"/>
+      <line num="48" count="8" type="stmt"/>
+      <line num="49" count="8" type="stmt"/>
+      <line num="50" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="51" count="1" type="stmt"/>
+      <line num="58" count="7" type="stmt"/>
+      <line num="59" count="7" type="cond" truecount="2" falsecount="0"/>
+      <line num="60" count="1" type="stmt"/>
+      <line num="67" count="6" type="stmt"/>
+      <line num="68" count="6" type="cond" truecount="2" falsecount="0"/>
+      <line num="69" count="1" type="stmt"/>
+      <line num="76" count="5" type="cond" truecount="4" falsecount="0"/>
+      <line num="77" count="1" type="stmt"/>
+      <line num="84" count="4" type="stmt"/>
+      <line num="90" count="1" type="stmt"/>
+      <line num="92" count="3" type="stmt"/>
+      <line num="93" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="94" count="1" type="stmt"/>
+      <line num="96" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="97" count="1" type="stmt"/>
+      <line num="99" count="1" type="stmt"/>
+    </file>
+    <file name="roomservices.js" path="C:\CEDT Series\SWLab\SEProject\se-project-be-68-2-kingoporii\controllers\roomservices.js">
+      <metrics statements="14" coveredstatements="14" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="9" count="4" type="stmt"/>
+      <line num="10" count="4" type="stmt"/>
+      <line num="11" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="14" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="15" count="3" type="stmt"/>
+      <line num="16" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="21" count="2" type="stmt"/>
+      <line num="30" count="2" type="stmt"/>
+      <line num="35" count="1" type="stmt"/>
+    </file>
   </project>
 </coverage>

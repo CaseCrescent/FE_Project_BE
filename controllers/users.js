@@ -43,7 +43,8 @@ exports.getUsers = async (req, res, next) => {
     const endIndex = page * limit;
 
     try {
-        const total = await User.countDocuments();
+        // Count must respect the same filter as the query, otherwise pagination.next/prev lies.
+        const total = await User.countDocuments(JSON.parse(queryStr));
         query = query.skip(startIndex).limit(limit);
 
         // 8. Execute query
@@ -74,12 +75,12 @@ exports.getUsers = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
     try {
         // 1. Find the user and update them with whatever is in req.body
-        // The { new: true } option ensures it returns the updated document, not the old one
+        // returnDocument:'after' returns the updated document (replaces deprecated `new:true` in Mongoose 9)
         const user = await User.findByIdAndUpdate(
-            req.params.id, 
-            req.body, 
+            req.params.id,
+            req.body,
             {
-                new: true,
+                returnDocument: 'after',
                 runValidators: true
             }
         );

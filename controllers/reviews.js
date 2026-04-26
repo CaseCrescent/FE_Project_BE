@@ -135,7 +135,7 @@ exports.updateReview = async (req, res, next) => {
         if (req.body.comment !== undefined) updates.comment = req.body.comment;
 
         review = await Review.findByIdAndUpdate(req.params.id, updates, {
-            new: true,
+            returnDocument: 'after',
             runValidators: true
         });
 
@@ -230,7 +230,7 @@ exports.likeReview = async (req, res, next) => {
         const updated = await Review.findByIdAndUpdate(
             req.params.id,
             update,
-            { new: true }
+            { returnDocument: 'after' }
         );
 
         res.status(200).json({

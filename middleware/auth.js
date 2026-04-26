@@ -18,12 +18,15 @@ exports.protect = async(req, res, next)=>{
         //Verify token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        console.log(decoded);
-
         req.user = await User.findById(decoded.id);
 
+        // Token may still be valid for a user that was deleted — reject instead of crashing in authorize()
+        if (!req.user) {
+            return res.status(401).json({success: false, message: 'Not authorize to access this route'});
+        }
+
         next();
-        
+
     } catch(err){
         console.log(err.stack);
         return res.status(401).json({success: false, message: 'Not authorize to access this route'});

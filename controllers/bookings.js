@@ -16,7 +16,6 @@ exports.getBookings = async(req, res, next) => {
     }
     else{ //If you are Admin, you see all XD!
         if(req.params.hotelId){
-            console.log(req.params.hotelId);
             query = Booking.find({hotel:req.params.hotelId})
                 .populate({ path: 'hotel', select: 'name province tel' })
                 .populate({ path: 'user', select: 'name email' })
@@ -59,6 +58,14 @@ exports.getBooking = async(req, res, next) => {
             return res.status(404).json({
                 success: false,
                 message: `No booking with the id of ${req.params.id}`
+            });
+        }
+
+        // IDOR guard: only the booking owner or an admin can read a single booking
+        if(booking.user.toString() !== req.user.id && req.user.role !== 'admin'){
+            return res.status(403).json({
+                success: false,
+                message: `User ${req.user.id} is not authorized to view this booking`
             });
         }
 
@@ -179,19 +186,24 @@ exports.updateBooking = async(req, res, next) => {
             }
         }
 
+        // Whitelist fields the client is allowed to update — prevents mass assignment of
+        // user / hotel / createdAt via raw req.body.
+        const updates = {};
+        if (req.body.apptDate !== undefined) updates.apptDate = req.body.apptDate;
+
         if (req.body.services && Array.isArray(req.body.services)) {
             const serviceIds = req.body.services.map(s => s.serviceId);
             const validServices = await RoomService.find({ _id: { $in: serviceIds }, status: 'available' });
             const validServiceIds = validServices.map(s => s._id.toString());
 
-            req.body.services = req.body.services.map((s) => ({
+            updates.services = req.body.services.map((s) => ({
                 service: s.serviceId,
                 count: s.quantity,
                 status: validServiceIds.includes(s.serviceId.toString()) ? 'pending' : 'cancelled'
             }));
         }
 
-        booking = await Booking.findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true});
+        booking = await Booking.findByIdAndUpdate(req.params.id, updates, {returnDocument: 'after', runValidators: true});
 
         res.status(200).json({success: true, data: booking});
 

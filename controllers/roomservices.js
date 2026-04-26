@@ -103,7 +103,7 @@ exports.updateRoomService = async (req, res) => {
     const service = await RoomService.findByIdAndUpdate(
       req.params.id,
       { name, description, status, minQuantity, maxQuantity },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
 
     if (!service) {

@@ -45,8 +45,12 @@ const UserSchema=new mongoose.Schema({
 
 //Encrypt password using bcrypt
 UserSchema.pre('save',async function(next) {
+    // Skip hashing when password isn't being modified — otherwise an already-hashed
+    // password gets hashed again on save() and matchPassword() will never succeed.
+    if (!this.isModified('password')) return next();
     const salt=await bcrypt.genSalt(10);
     this.password=await bcrypt.hash(this.password, salt);
+    next();
 });
 
 //Sign JWT and return

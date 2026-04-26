@@ -16,11 +16,11 @@ exports.getHotels = async(req, res, next) => {
 
     //Loop over remove feilds and delete them fron reqQuery
     removeFeilds.forEach(param => delete reqQuery[param]);
-    console.log(reqQuery);
 
     //Create query string
     let queryStr = JSON.stringify(reqQuery);
-    queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in\b)/g, match => `${match}`);
+    // Add MongoDB '$' prefix so operators like ?price[gt]=100 actually translate to { price: { $gt: 100 } }
+    queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
 
     //finding resource
     query = Hotel.find(JSON.parse(queryStr))
@@ -48,7 +48,8 @@ exports.getHotels = async(req, res, next) => {
     const endIndex = page * limit;
 
     try{
-        const total = await Hotel.countDocuments();
+        // Count must respect the same filter as the query, otherwise pagination.next/prev lies.
+        const total = await Hotel.countDocuments(JSON.parse(queryStr));
         query = query.skip(startIndex).limit(limit);
 
         //Execute query
@@ -90,7 +91,7 @@ exports.getHotel = async(req, res, next) => {
         });
 
     if(!hotel){
-        return  res.status(400).json({success: false});
+        return res.status(404).json({success: false, message: `No hotel with the id of ${req.params.id}`});
     }
 
     res.status(200).json({success: true, data: hotel});
@@ -120,7 +121,7 @@ exports.createHotel = async(req, res, next) => {
 exports.updateHotel = async(req, res, next) => {
     try{
         const hotel = await Hotel.findByIdAndUpdate(req.params.id ,req.body,{
-            new: true,
+            returnDocument: 'after',
             runValidators: true
         });
 
