@@ -4,7 +4,6 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cookieParser=require("cookie-parser");
 const connectDB = require('./config/db');
-const mongoSanitize=require('express-mongo-sanitize');
 
 // Load env vars
 dotenv.config({ path: './config/config.env' });
@@ -44,9 +43,6 @@ app.use((req, res, next) => {
 
 //add body parser
 app.use(express.json());
-
-//sanitize sql injection
-app.use(mongoSanitize());
 
 //Mount routers
 app.use('/api/v1/hotels', hotels);
