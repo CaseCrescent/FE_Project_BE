@@ -200,6 +200,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 //add cookie parser
 app.use(cookieParser());
 
+
 // CORS - allow configured frontend origin (or localhost for local dev)
 const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:3000').split(',');
 app.use((req, res, next) => {
